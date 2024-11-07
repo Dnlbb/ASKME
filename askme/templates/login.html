@@ -1,0 +1,33 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+
+{% block header %}
+<div class="d-flex gap-3 align-items-center">
+    <h1>Login</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-9">
+        <form class="was-validated col-6">
+            <div class="mb-3">
+                <label class="form-label">Login</label>
+                <input class="form-control" type="text" id="login" required/>
+                <div class="invalid-feedback">Please enter a login</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input class="form-control" type="text" id="password" required/>
+                <div class="invalid-feedback">Please enter a password</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Log in</button>
+        </form>
+
+        <a href="#" class="mt-2 d-block">Create new account</a>
+    </div>
+</div>
+{% endblock %}

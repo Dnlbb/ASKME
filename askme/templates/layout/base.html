@@ -1,16 +1,18 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AskMe</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css"
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <div class="d-flex w-100 justify-content-between align-items-center">
-          <a class="navbar-brand" href="#">AskMe</a>
+          <a class="navbar-brand" href="{% url 'home' %}">AskMe</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -35,98 +37,19 @@
             </button>
           </form>
 
-          <div style="height: 50px">
-            <div class="d-flex gap-3">
-              <a href="#">log in</a>
-              <a href="#">register</a>
-            </div>
+          <div class="d-flex gap-1">
+            {% block user %}{% endblock %}
           </div>
         </div>
       </div>
     </nav>
 
     <main class="container mt-3">
-      <div class="d-flex gap-3 align-items-center">
-        <h1>Registration</h1>
-      </div>
+      {% block header %}{% endblock %}
       <div class="row">
         <div class="col-9">
-          <form class="was-validated col-6">
-            <div class="mb-3">
-              <label class="form-label">Login</label>
-              <input
-                class="form-control"
-                type="text"
-                id="login"
-                name="Login"
-                placeholder="Dr.Pepper"
-                required
-              />
-              <div class="invalid-feedback">Please enter a login</div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Email</label>
-              <input
-                class="form-control"
-                type="text"
-                id="email"
-                name="Email"
-                placeholder="dr.pepper@example.com"
-                required
-              />
-              <div class="invalid-feedback">Please enter an email</div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">NickName</label>
-              <input
-                class="form-control"
-                type="text"
-                id="nickName"
-                name="NickName"
-                placeholder="Pepper"
-                required
-              />
-              <div class="invalid-feedback">Please enter an NickName</div>
-            </div>
-
-            <div class="mb-3">
-              <label class="form-label">Password</label>
-              <input
-                class="form-control"
-                type="text"
-                id="password"
-                name="Password"
-                placeholder="*******"
-                required
-              />
-              <div class="invalid-feedback">Please enter an password</div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Repeat password</label>
-              <input
-                class="form-control"
-                type="text"
-                id="reapeatenPassword"
-                name="Repeat Password"
-                placeholder="*******"
-                required
-              />
-              <div class="invalid-feedback">Please repeat a password</div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Upload avatar</label>
-              <input
-                type="file"
-                class="form-control"
-                aria-label="file example"
-                placeholder="avatar.jpg"
-                required
-              />
-              <div class="invalid-feedback">Please choose a file</div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Register!</button>
-          </form>
+        {% block content %}
+          {% endblock %}
         </div>
         <div class="col">
           <section class="mb-3">
@@ -213,6 +136,6 @@
       </div>
     </main>
 
-    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="{% static '/js/bootstrap.js' %}"></script>
   </body>
 </html>

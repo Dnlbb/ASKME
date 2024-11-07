@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="card w-100" style="width: 18rem">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-3">
+                <div class="border mb-2" style="height: 100px">
+                    <img src="{% static '/img/css_avatar.jpg' %}" alt="card1" class="img-fluid"/>
+                </div>
+                <input
+                        class="form-control"
+                        type="number"
+                        value="5"
+                        placeholder="Default input"
+                        aria-label="default input example"
+                />
+            </div>
+            <div class="col-9">
+                <h5 class="card-title"><a href="{% url 'question' question_id=question.id %}"> {{ question.title }}</a></h5>
+                <p class="card-text">
+                    {{ question.content }}
+                </p>
+
+                <div class="d-flex gap-5">
+                    <a href="#" class="card-link">Answer (3)</a>
+                    <div>
+                        {% include 'components/tags.html'%}
+                    </div>
+                </div>
+                <div class="d-flex mt-3 align-items-center">
+                    <button
+                            type="button"
+                            class="btn btn-outline-primary btn-sm"
+                    >
+                        <i class="bi bi-hand-thumbs-up"></i> Like
+                    </button>
+                    <span class="ms-2">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
