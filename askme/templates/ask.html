@@ -1,0 +1,87 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block user %}
+{% include 'components/userpanel.html'%}
+{% endblock %}
+
+{% block header %}
+<div class="d-flex gap-3 align-items-center">
+    <h1>New Question</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-9">
+        <style>
+            .form-container {
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            textarea {
+                height: 150px;
+            }
+
+            .ask-btn {
+                width: 100%;
+                margin-top: 20px;
+            }
+        </style>
+        <div class="container form-container">
+            <form class="was-validated">
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input
+                            class="form-control"
+                            type="text"
+                            id="titleQuestion"
+                            placeholder="How to build a moon park?"
+                            required
+                    />
+                    <div class="invalid-feedback">
+                        Please enter a title in the textarea.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Text</label>
+                    <textarea
+                            class="form-control"
+                            type="text"
+                            id="text"
+                            placeholder="Really, how? Have no idea about it."
+                            required
+                    ></textarea>
+                    <div class="invalid-feedback">
+                        Please enter a text in the textarea.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tags</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="tags"
+                            placeholder="moon, park, puzzle"
+                            required
+                    />
+                    <div class="invalid-feedback">
+                        Please enter a tags in the textarea.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button
+                            type="submit"
+                            class="btn btn-primary ask-btn"
+                            style="width: 10%"
+                    >
+                        ASK!
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
