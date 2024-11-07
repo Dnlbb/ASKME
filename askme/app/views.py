@@ -63,3 +63,6 @@ def login(request):
 
 def signup(request):
   return render(request, 'signup.html')
+
+def red(request):
+  return render(request, 'red.html')
