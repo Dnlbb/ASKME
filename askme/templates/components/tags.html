@@ -1,6 +1,3 @@
 <div>
-    Tags:
-    <a href="#" class="card-link">{{ question.tags.0 }}</a>
-    <a href="#" class="card-link">{{ question.tags.1 }}</a>
-    <a href="#" class="card-link">{{ question.tags.2 }}</a>
+   Tags: {{ question.tag_list|join:", " }}
 </div>
