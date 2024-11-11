@@ -39,7 +39,7 @@ def questionitems(request, question_id):
 def tag(request, tag_name):
     questions = Question.objects.by_tag(tag_name)
     page = paginate(questions, request)
-    return render(request, 'index.html', {'questions': page, 'tag_name': tag_name})
+    return render(request, 'tags.html', {'question': page, 'tag_name': tag_name})
 
 
 def ask(request):

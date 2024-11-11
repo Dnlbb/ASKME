@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Count
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
@@ -18,7 +20,7 @@ class Tag(models.Model):
 
 class QuestionManager(models.Manager):
     def best_questions(self):
-        return self.order_by('-rating')
+        return self.annotate(like_count=Count('likes')).order_by('-like_count')
 
     def new_questions(self):
         return self.order_by('-created_at')
@@ -55,7 +57,6 @@ class Answer(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="answers")
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    is_accepted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Answer by {self.author.username} on {self.question.title}"

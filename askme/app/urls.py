@@ -10,5 +10,5 @@ urlpatterns = [
    path('tag/<str:tag_name>/', views.tag, name='tag'),
    path('red', views.red, name='red'),
    path('hot', views.hot, name='hot'),
-   #path('admin/', admin.site.urls),
+   path('admin/', admin.site.urls),
 ]

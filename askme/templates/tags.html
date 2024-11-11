@@ -1,0 +1,24 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+
+{% block user %}
+{% include 'components/userpanel.html'%}
+{% endblock %}
+
+{% block header %}
+<div class="d-flex gap-3 align-items-center">
+    <h1>Tag: {{tag_name}}</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col-9">
+    <div class="d-flex flex-column gap-3">
+        {% for question in question %}
+        {% include 'components/card.html'%}
+        {% endfor %}
+    </div>
+     {% include 'components/paginator.html'%}
+</div>
+{% endblock %}

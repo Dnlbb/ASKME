@@ -1,3 +1,7 @@
 <div>
-   Tags: {{ question.tag_list|join:", " }}
+   Tags:
+   {% for tag in question.tag_list %}
+      <a href="{% url 'tag' tag %}">{{ tag }}</a>
+      {% if not forloop.last %}, {% endif %}
+   {% endfor %}
 </div>
