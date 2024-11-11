@@ -1,58 +1,45 @@
-from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-
-QUESTIONS = []
-for i in range(1,30):
-  QUESTIONS.append({
-    'title': 'title ' + str(i),
-    'id': i,
-    'text': 'text' + str(i),
-    'tags': ['A' * (i % 5), 'AAA' * (i % 5), 'AAA' * (i % 5)],
-  })
+from app.models import User, Question, Answer, Tag, QuestionLike, AnswerLike
 
 
 
-ANSWERS = []
-for i in range(1,30):
-  ANSWERS.append({
-    'name': 'name ' + str(i),
-    'text': 'text' + str(i)
-  })
-
-
-def paginate(objects_list, request, per_page=5):
+def paginate(objects_list, request, per_page=3):
   page_num = request.GET.get('page', 1)
   paginator = Paginator(objects_list, per_page)
-
   try:
     page = paginator.page(page_num)
   except PageNotAnInteger:
     page = paginator.page(1)
   except EmptyPage:
     page = paginator.page(paginator.num_pages)
-
   return page
 
 
+
+def hot(request):
+    hot_questions = Question.objects.best_questions()
+    page = paginate(hot_questions, request)
+    return render(request, 'hot.html', {'question': page})
+
+
 def index(request):
-  page = paginate(QUESTIONS, request)
-  return render(request, 'index.html', {'question': page})
+    questions = Question.objects.new_questions()
+    page = paginate(questions, request)
+    return render(request, 'index.html', {'question': page})
 
 
 def questionitems(request, question_id):
-  q = QUESTIONS[question_id]
-  page = paginate(ANSWERS, request)
-  return render(request, 'question.html',{'answers': page, 'question': q})
+    question = get_object_or_404(Question, id=question_id)
+    answers = Answer.objects.filter(question=question).order_by('-created_at')
+    page = paginate(answers, request)
+    return render(request, 'question.html', {'question': question, 'answers': page})
 
-def tag(request,tag_name):
-  questions = [q for q in QUESTIONS if tag_name in q.get("tags", [])]
-  if not questions:
-    raise Http404("No found")
-  page = paginate(questions, request)
-  return render(request, 'index.html', {'question': page})
 
+def tag(request, tag_name):
+    questions = Question.objects.by_tag(tag_name)
+    page = paginate(questions, request)
+    return render(request, 'tags.html', {'question': page, 'tag_name': tag_name})
 
 
 def ask(request):

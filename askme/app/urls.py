@@ -9,5 +9,6 @@ urlpatterns = [
    path('signup', views.signup, name='signup'),
    path('tag/<str:tag_name>/', views.tag, name='tag'),
    path('red', views.red, name='red'),
-   #path('admin/', admin.site.urls),
+   path('hot', views.hot, name='hot'),
+   path('admin/', admin.site.urls),
 ]

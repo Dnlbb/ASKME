@@ -1,6 +1,7 @@
 <div>
-    Tags:
-    <a href="#" class="card-link">{{ question.tags.0 }}</a>
-    <a href="#" class="card-link">{{ question.tags.1 }}</a>
-    <a href="#" class="card-link">{{ question.tags.2 }}</a>
+   Tags:
+   {% for tag in question.tag_list %}
+      <a href="{% url 'tag' tag %}">{{ tag }}</a>
+      {% if not forloop.last %}, {% endif %}
+   {% endfor %}
 </div>
